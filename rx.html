@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPM | Secure Access</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background: #000; color: #fff; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        #video-bg { position: fixed; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.2; }
+        .wrapper { display: flex; flex-direction: column; gap: 15px; width: 320px; }
+        .glass { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 25px; text-align: center; }
+        .val { font-size: 32px; font-weight: 700; color: #fff; }
+        .label { font-size: 10px; color: #ccc; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; display: block; }
+        input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid #444; padding: 12px; margin-bottom: 10px; color: #fff; border-radius: 12px; text-align: center; font-size: 13px; }
+        .btn { width: 100%; padding: 12px; background: #fff; color: #000; border: none; border-radius: 12px; cursor: pointer; font-weight: 700; font-size: 13px; }
+        .chat-container { height: 50px; overflow: hidden; position: relative; border-top: 1px solid #333; margin-top: 15px; padding-top: 10px; }
+        .chat-slide { position: absolute; width: 100%; animation: slideDown 3s linear infinite; }
+        @keyframes slideDown { 0% { transform: translateY(-100%); opacity: 0; } 20% { transform: translateY(0); opacity: 1; } 80% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(100%); opacity: 0; } }
+        .menu-btn { position: absolute; top: 30px; right: 30px; cursor: pointer; color: #fff; }
+        .dropdown { position: absolute; top: 60px; right: 30px; background: #111; border: 1px solid #444; padding: 15px; border-radius: 15px; display: none; }
+        .dropdown a { display: block; color: #fff; text-decoration: none; font-size: 12px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop id="video-bg"><source src="https://videotourl.com/videos/1780523397980-3773e97d-ef5d-42ff-b30c-984fafa287c4.mp4" type="video/mp4"></video>
+
+    <div class="menu-btn" onclick="document.getElementById('m').style.display = (document.getElementById('m').style.display === 'block' ? 'none' : 'block')">☰</div>
+    <div class="dropdown" id="m">
+        <a href="#">TESTIMONI</a>
+        <a href="https://wa.me/6285137893277">BUY ACCES JPM</a>
+        <a href="https://t.me/RxMaStayHigh">BANTUAN</a>
+    </div>
+
+    <div class="wrapper">
+        <div class="glass">
+            <span class="label">PENGGUNA AKTIF</span>
+            <span class="val" id="count">0</span>
+        </div>
+
+        <div class="glass">
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <button class="btn" onclick="alert('USER & PASWORD TIDAK ADA DI DATABASE')">MASUK</button>
+            
+            <div class="chat-container">
+                <div class="chat-slide" id="live-chat">Initializing...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        setInterval(() => document.getElementById('count').innerText = Math.floor(Math.random()*400+100), 10000);
+        
+        const names = ["Harry", "Kyyaj", "Black", "Renss", "Jovyy", "Rizza", "Alfan", "Billa", "Cakra", "Daffa", "Elvan", "Faris", "Gilan", "Hilmi", "Indra", "Jakaa", "Kevin", "Lutfi", "Mirza", "Nafis", "Oktaa", "Putra", "Qorry", "Rifki", "Satya", "Teguh", "Utari", "Vanes", "Wahyu", "Xaver", "Yudha", "Zidan", "Arkan", "Bayuu", "Citra", "Dimas", "Edwar", "Fahmi", "Genta", "Hafez", "Ikbal", "Jason", "Kemal", "Lucky", "Mahes", "Nabil", "Orlan", "Panji", "Qadir", "Ramaa", "Sandy", "Titan", "Usman", "Verry", "Wawan", "Xenia", "Yusuf", "ZakiI", "AldoO", "BimoO", "Cahya", "Denyy", "EvanN", "Farel", "Galih", "Hafiz", "Irfan", "Jamal", "Krisn", "LianN", "Malik", "Nanda", "Odyyy", "Pandu", "Qomar", "Radit", "Surya", "Tommy", "Upann", "Valen", "Wisnu", "XyloO", "Yanto", "Zulii", "Abdan", "Bagas", "Cendy", "Dedyy", "Emill", "Fajar", "Ghani", "Hendy", "Ilham", "Juang", "Kholk", "Lucas", "Maman", "Nizar", "Oscar", "Pasha"];
+        const commonMsgs = ["SUKSES JPM", "SUKSES SW GRUB", "SUKSES PROMOSI"];
+        
+        function updateChat() {
+            let user = names[Math.floor(Math.random() * names.length)];
+            let sensor = user.substring(0, 2) + "*" + user.substring(3);
+            let msg = "";
+
+            if (Math.random() > 0.8) {
+                const rxmaMsgs = ["RXMA SUKSES DELETE USER", "RXMA SUKSES NAMBAH USER"];
+                msg = rxmaMsgs[Math.floor(Math.random() * rxmaMsgs.length)];
+                sensor = "Rxma";
+            } else {
+                msg = commonMsgs[Math.floor(Math.random() * commonMsgs.length)];
+            }
+            
+            document.getElementById('live-chat').innerHTML = `<div style="font-size:11px; font-weight:bold">${sensor}</div><div style="font-size:11px; color:#aaa">${msg}</div>`;
+        }
+        
+        setInterval(updateChat, 3000);
+        updateChat();
+    </script>
+</body>
+</html>
